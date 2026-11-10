@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚗 Telemetria veicular com TinyML no ESP32
+# Telemetria veicular com TinyML no ESP32
 
 **Detecção de manobras de direção _dentro_ do microcontrolador, com uma CNN 1D quantizada em INT8 no TensorFlow Lite Micro.**
 
@@ -12,7 +12,7 @@
 ![Grafana](https://img.shields.io/badge/Grafana-11-F46800?logo=grafana&logoColor=white)
 ![pytest](https://img.shields.io/badge/testes-pytest-0A9EDC?logo=pytest&logoColor=white)
 
-| 🎯 Manobras detectadas | ✅ Classe certa | 📦 Modelo INT8 | 🧠 Arena TFLM | 🔁 INT8 = FP32 |
+| Manobras detectadas | Classe certa | Modelo INT8 | Arena TFLM | INT8 = FP32 |
 |:---:|:---:|:---:|:---:|:---:|
 | **93%** | **98%** | **10,5 KB** | **5,2 KB** | **98% das decisões** |
 
@@ -40,16 +40,16 @@ Sensores: **MPU6050** (acelerômetro e giroscópio, entrada do modelo), **DHT22*
 
 ```mermaid
 flowchart LR
-    subgraph ESP32["🔌 ESP32"]
+    subgraph ESP32["ESP32"]
         IMU["MPU6050<br/>50 Hz"] --> FEAT["3 atributos<br/>invariantes ao rumo"]
         FEAT --> WIN["janela de 2 s<br/>a cada 0,5 s"]
         WIN --> CNN["CNN 1D INT8<br/>TFLite Micro"]
         CNN --> FILT["filtro de<br/>eventos"]
         ENV["DHT22 / PIR"] --> FILT
     end
-    FILT -- "JSON via serial" --> GW["🐍 gateway<br/>Python"]
+    FILT -- "JSON via serial" --> GW["gateway<br/>Python"]
     GW --> DB[("InfluxDB")]
-    DB --> GF["📊 Grafana"]
+    DB --> GF["Grafana"]
 ```
 
 Cada manobra vira uma linha JSON na serial:
